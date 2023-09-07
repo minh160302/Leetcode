@@ -29,7 +29,6 @@ class Solution {
             dumb = next;
         }
         
-        System.gc();
         rtail.next = dumb;
         return res.next;
     }
