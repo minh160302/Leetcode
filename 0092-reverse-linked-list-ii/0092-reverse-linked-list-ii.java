@@ -29,7 +29,7 @@ class Solution {
             dumb = next;
         }
         
-        // System.gc();
+        System.gc();
         rtail.next = dumb;
         return res.next;
     }
