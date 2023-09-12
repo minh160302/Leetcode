@@ -3,7 +3,6 @@ class Solution {
         int[] map = new int[26];
         for (char c : s.toCharArray())
             map[c - 'a']++;
-        Arrays.sort(map);
         HashSet<Integer> set = new HashSet<>();
         int res = 0;
         for (int i = 0; i < 26; i++) {
@@ -16,3 +15,4 @@ class Solution {
         return res;
     }
 }
+
