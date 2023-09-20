@@ -8,12 +8,16 @@ class Solution {
             if (fw <= x) {
                 sumForward.put(fw, i + 1);
             }
+            else
+                break;
         }
         for (int i = n-1; i >= 0; i--) {
             bw += nums[i];
             if (bw <= x) {
                 sumBackward.put(bw, n - i);
             }
+            else
+                break;
         }
         int res = Integer.MAX_VALUE;
         if (sumForward.containsKey(x))
