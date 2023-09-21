@@ -9,7 +9,6 @@ class Solution {
     }
 
     public int helper(int[] nums1, int[] nums2, int m, int n, int targetIndex) {
-        System.out.println(targetIndex);
         int p = 0;
         int p1 = 0, p2 = 0;
         int val = -1;
@@ -32,7 +31,6 @@ class Solution {
                 val = nums2[p2 + targetIndex - p];
             }                
         }
-        System.out.println(val);
         return val;
     }
 }
