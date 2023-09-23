@@ -16,14 +16,13 @@ class Solution {
     public int dfs(int[][] grid, int m, int n, int i, int j, int[][] memo) {
         if (memo[i][j] != 0)
             return memo[i][j];
-        int cnt = 1;
+        memo[i][j] = 1;
         for (int[] dir : dirs) {
             int nextI = i + dir[0], nextJ = j + dir[1];
             if (nextI >= 0 && nextJ >= 0 && nextI < m && nextJ < n && grid[nextI][nextJ] > grid[i][j]) {
-                cnt = (cnt + dfs(grid, m, n, nextI, nextJ, memo)) % mod;
+                memo[i][j] = (memo[i][j] + dfs(grid, m, n, nextI, nextJ, memo)) % mod;
             }
         }
-        memo[i][j] = cnt;
-        return cnt;
+        return memo[i][j];
     }
 }
