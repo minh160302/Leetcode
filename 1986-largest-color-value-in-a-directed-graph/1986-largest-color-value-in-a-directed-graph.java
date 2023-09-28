@@ -1,4 +1,8 @@
-class Solution {  
+class Solution {
+    /*
+        topological sort (Kahn)
+        copy colors value from parent node to child node
+     */
     public int largestPathValue(String colors, int[][] edges) {
         int n = colors.length();
         int[] degrees = new int[n];
@@ -10,29 +14,27 @@ class Solution {
             map.get(from).add(to);
             degrees[to]++;
         }
-        // let dp[u][c] := the maximum count of vertices with color c of any path starting from vertex u.
-        int[][] dp = new int[n][26];
         Queue<Integer> queue = new LinkedList<>();
-        for (int i = 0; i < n; i++) { // leaf
+        for (int i = 0; i < n; i++) {
             if (degrees[i] == 0)
                 queue.add(i);
         }
-        int res = 0, nodeSeen = 0;
-        while (!queue.isEmpty()) {  // Kahn's algorithm implemented in bfs style
+        int res = 0, nodeCount = 0;
+        int[][] dp = new int[n][26];
+        while (!queue.isEmpty()) {
             int p = queue.poll();
-            dp[p][colors.charAt(p) - 'a']++;
+            nodeCount++;
+            dp[p][colors.charAt(p) - 'a']++;    // max color count of all paths upto p
             res = Math.max(res, dp[p][colors.charAt(p) - 'a']);
-            nodeSeen++;            
             for (int next: map.get(p)) {
-                for (int i = 0; i < 26; i++) {
-                    dp[next][i] = Math.max(dp[next][i], dp[p][i]);  
-                    // copy results from all colors filled by parents to children nodes
+                for (int i = 0; i < 26; i++) {  // copy colors
+                    dp[next][i] = Math.max(dp[next][i], dp[p][i]);
                 }
                 degrees[next]--;
                 if (degrees[next] == 0)
                     queue.add(next);
             }
         }
-        return nodeSeen < n ? -1 : res;
+        return nodeCount < n ? -1 : res;
     }
 }
